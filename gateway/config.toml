@@ -1,0 +1,7 @@
+[xbee]
+port= "COM7"
+discorvery_time=20
+
+
+[console]
+log_level = "info"
