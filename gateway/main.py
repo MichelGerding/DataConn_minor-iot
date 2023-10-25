@@ -65,7 +65,7 @@ def new_dev_discovered(remote):
     addr = remote.get_64bit_addr()
     if not (addr in connected_nodes):
         address = remote.get_node_id()
-        logger.info('new device found ', address)
+        logger.info(f'new device found {address}')
         xnet.add_remote(remote)
 
         connected_nodes.append(addr)

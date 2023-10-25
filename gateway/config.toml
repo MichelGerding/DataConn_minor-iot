@@ -4,4 +4,4 @@ discorvery_time=20
 
 
 [console]
-log_level = "info"
+log_level = "debug"
