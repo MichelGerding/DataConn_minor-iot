@@ -1,75 +1,64 @@
-# XBee sensor management
-this folder contains the gateway application for the Xbee sensor management. 
+# XBee Sensor Management
+This folder contains the gateway application for managing XBee sensors.
 
-## Setup 
-in the following chapter we will discuss how you can run the management tool. 
+## Setup
+In the following chapter, we will discuss how you can run the management tool.
 
-### general usage 
-To use this management tool you need to have a few dependencies installed
+### General Usage
+To use this management tool, you need to have a few dependencies installed:
 
 - Python 3
-    - pip
+- pip
 
-once you have these dependencies installed you can install the application./ this can be done with the following command.
+Once you have these dependencies installed, you can install the application. This can be done with the following command:
 
-```bash
 python -m pip install -r ./requirements.txt
-```
-once you have done this you can run the appllication to do that you can continue to `running the application`
 
+Once you have done this, you can run the application. To do that, please proceed to the "Running the Application" section.
 
-### development
-for the development of the frontend you will need 2 extra dependencies 
-- nodejs
-- npm 
+### Development
+For the development of the frontend, you will need two extra dependencies:
 
-to install the development you can go to the front folder and execute the command 
+- Node.js
+- npm
 
-```bash
+To install these development dependencies, go to the "front" folder and execute the command:
+
 npm install
-```
 
-the frontend is developed using the svelt framework with typescritp and uses vite as bundeler/compiler
+The frontend is developed using the Svelte framework with TypeScript and uses Vite as a bundler/compiler.
 
-to buld the frontend you can execute the command
+To build the frontend, execute the command:
 
-```bash
-npm build
-```
+npm run build
 
-## running the application 
-to run the application you need to ensure you have configured and connected a couple things first. 
+## Running the Application
+To run the application, you need to ensure you have configured and connected a few things first.
 
-### configure the xbee
-to configure the application to use the correct xbee you first need to connect the xbee and get the COM port it is connected to. this can be found in device manager. 
+### Configure the XBee
+To configure the application to use the correct XBee, you first need to connect the XBee and find the COM port it is connected to. You can find this information in Device Manager.
 
-once you have the com port you need to modify the `config.toml` file and replace the COM port you have used. 
+Once you have the COM port, you need to modify the config.toml file and replace the COM port you have used.
 
+### Starting the Application
+Once you have successfully configured the application, you can launch it using the following command. To stop it, simply press Ctrl + C while in the terminal window:
 
-### starting the application
-once you have done this succesfully configured the application you can lauch it using the following command. to stop it simply press ctrl + c while in the window of the terminal
+python -m uvicorn main:app --port 8080
 
-```bash
-python -m uvicorn main:app  --port 8080
-```
+After executing this command, a webserver will be available at the IP of the device on port 8080.
 
-once this commadn is executed a webserver will be available at the ip of thje device on port 8080
+### Connecting Sensors to the Network
+Once the server is running, the next step is to connect devices to the network. To do this, simply access the website and press the "Start Device Scan" button. When this button is pressed, the application will search for new devices for the next 20 seconds, or as otherwise configured in config.toml as "discovery_time" (minimum 4 seconds, maximum 24 seconds).
 
-### connecting sensors to the network
-once the server is running the next step you need to do is connnect devices to the network. 
-to do this you simply need to access the website and press the button `start device scan`.
-once this button is pressed it will look foir new devices for the following 20 seconds or otherwise configered in `config.toml` as `discorvery_time` minimum 4 sec max 24 secxonds. 
+Once a sensor is connected, you will start to see messages from the connected sensors. If the name of the sensor is null or undefined, you need to connect the device again. This can be done by simply pressing the "Start Device Scan" button.
 
-once the sensaor is connected you will start to see the messages of the connected sensors come in. if the name of the sensor is null or undefined you need to connect the device again because it was connected from a previous session. this can be done by simply pressing the `start device scan button`.
+## Console Messages
+When the application is running, you can find the following messages in the console:
 
-## console messages 
-when the applicationis running you can find the following messages in the console.
+- "New device found {address}": This message is sent to the console when a device is connected to the network. It is shown at the debug level (info and debug). The address in the message is the MAC address of the connected sensor.
+- "Received data from {address}: {data}": This message is sent to the console when new data is received. This message will only be seen when the log level is set to debug. The address is the address of the sensor that sent it, and the data is the decoded message that it has sent.
 
-- `new device found {address}`: this message is send to the console when a device is connected to the network. this is shown at the debug level info and debug. the address in the message is the mac address of the connected sensor
-- `Received data from {address}: {data}`: this message is send to the console when new data is recieved. this message will only be seen when the log level is set to debug. the address is the address of the sensor that send it and the data is the decoded message that it has send. 
+To configure the log level, you can change the "console.log_level" in the configuration file.
 
-to configure the log level you can change the `console.log_level` in the configuration file. 
-
-
-## contributers 
+Contributors
 - [Michel Gerding](https://github.com/MichelGerding)
